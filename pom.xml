@@ -14,6 +14,11 @@
 			<artifactId>groovy-all</artifactId>
 			<version>2.0.6</version>
 		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.8</version>
+		</dependency>
 
 		<!-- for testing -->
 		<dependency>
@@ -26,7 +31,6 @@
 			<groupId>org.easyb</groupId>
 			<artifactId>easyb-core</artifactId>
 			<version>1.5</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -57,7 +61,6 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/test/groovy</source>
 								<source>src/test/easyb</source>
 							</sources>
 						</configuration>
@@ -117,4 +120,7 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 </project>
