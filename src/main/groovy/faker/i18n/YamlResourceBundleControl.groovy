@@ -10,8 +10,7 @@ class YamlResourceBundleControl extends ResourceBundle.Control {
 	@Override
 	public ResourceBundle newBundle(String baseName, Locale locale,
 			String format, ClassLoader loader, boolean reload)
-			throws IllegalAccessException, InstantiationException,
-	IOException {
+			throws IllegalAccessException, InstantiationException, IOException {
 		String bundle = toBundleName(baseName, locale);
 		String resource = toResourceName(bundle, format);
 		
@@ -35,12 +34,12 @@ class YamlResourceBundleControl extends ResourceBundle.Control {
 			return "en"
 		}
 		
-		return locale.toLanguageTag().replaceAll("_", "-").toLowerCase()
+		return locale.toString().replaceAll("_", "-").toLowerCase()
 	}
 
 	@Override
 	public String toBundleName(String baseName, Locale locale) {
-		return baseName + "." + toTag(locale)
+		def bundleName = baseName + "." + toTag(locale)
 	}
 
 	@Override
