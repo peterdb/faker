@@ -3,7 +3,7 @@ package faker
 
 class Name extends Faker.Base {
 	public static String name() {
-		return parse("name.name")
+		return parse(Name, "name.name")
 	}
 	
 	public static String firstName() {
