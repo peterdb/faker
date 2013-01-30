@@ -4,6 +4,11 @@ class Internet extends Faker.Base {
 	
 	private static IPv6_SPACE
 	
+	/**
+	 * Generate an email address with a random domain name.
+	 * @param name optional, used to generate the local part. If not given, a random user name will be generated using {@link #userName(String)}
+	 * @return the generated email address
+	 */
 	public static String email(String name = null) {
 		[userName(name), domainName()].join('@')
 	}
@@ -65,16 +70,18 @@ class Internet extends Faker.Base {
 	}
 	  
 	public static String url() {
-		return "http://${domainName()}/${userName()}"
+		return "http://${domainName()}/${slug()}"
 	}
 
-//	public static String slug(String words = null, String glue = null) {
-//		if(!glue) {
-//			 ["-", "_", "."].sample()
-//		}
-//		
-//		
-//		
-//		(words || Lorem.words(2).join(' ')).gsub(' ', glue).downcase
-//	}
+	/**
+	 * A slug is the part of a URL which identifies a page using human-readable keywords
+	 * @return a slug
+	 */
+	public static String slug(String words = null, String glue = null) {
+		if(!glue) {
+			 glue = ["-", "_", "."].sample()
+		}
+		
+		(words ?: Lorem.words(2).join(' ')).replaceAll(' ', glue).toLowerCase()
+	}
 }
