@@ -12,7 +12,7 @@ class Faker {
 	private static ResourceBundle BUNDLE
 	
 	static {
-		BUNDLE = ResourceBundle.getBundle("faker", new Locale("fr"), Name.class.getClassLoader(), new YamlResourceBundleControl());
+		BUNDLE = ResourceBundle.getBundle("faker", new Locale("en"), Name.class.getClassLoader(), new YamlResourceBundleControl());
 		
 		[Address, Company, Internet, Lorem, Name].each { Class fakerClass ->
 			// make all no-arg methods into properties

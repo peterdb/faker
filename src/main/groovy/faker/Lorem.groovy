@@ -6,7 +6,7 @@ class Lorem extends Faker.Base {
 	}
 
 	public static List words(int wordCount = 3, boolean supplemental = false) {
-		return (translate('lorem.words') + (supplemental ? translate('lorem.supplemental') : [])).shuffle()[0..wordCount]
+		return (translate('lorem.words') + (supplemental ? translate('lorem.supplemental') : [])).shuffle()[0..<wordCount]
 	}
 	
 	public static List words(Range wordCount, boolean supplemental = false) {
