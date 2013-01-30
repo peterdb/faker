@@ -1,5 +1,6 @@
 package faker
 
+import java.util.ResourceBundle.BundleReference;
 import java.util.regex.Pattern;
 
 import java.lang.reflect.Method;
@@ -9,11 +10,26 @@ import faker.i18n.YamlResourceBundleControl
 
 class Faker {
 
-	private static ResourceBundle BUNDLE
+	private static ResourceBundleHolder bundleHolder = new ResourceBundleHolder()
+	public static final Config config = new Config()
 	
-	static {
-		BUNDLE = ResourceBundle.getBundle("faker", new Locale("en"), Name.class.getClassLoader(), new YamlResourceBundleControl());
+	private static class ResourceBundleHolder {
+		def ResourceBundle bundle
 		
+		public ResourceBundle getBundle() {
+			if(bundle == null) {
+				bundle = ResourceBundle.getBundle("faker", config.locale, Faker.class.getClassLoader(), new YamlResourceBundleControl());
+			}
+			
+			return bundle
+		}
+	}
+
+	public static void reload() {
+		bundleHolder.bundle = null
+	}
+
+	static {
 		[Address, Company, Internet, Lorem, Name].each { Class fakerClass ->
 			// make all no-arg methods into properties
 			fakerClass.getDeclaredMethods().each { Method m ->
@@ -55,7 +71,7 @@ class Faker {
 			assert key, "key cannot be null or empty"
 			
 			try {
-				return Faker.BUNDLE.getObject("faker.$key")
+				return Faker.bundleHolder.bundle.getObject("faker.$key")
 			} catch (MissingResourceException e) {
 				return ""
 			}
@@ -68,6 +84,7 @@ class Faker {
 			
 			def expression = fetch(key)
 			
+			println expression
 			return sh.evaluate("import faker.*; delegate.with { ignore -> return \"$expression\"}")
 		}
 		
