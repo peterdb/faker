@@ -1,0 +1,11 @@
+nl-be:
+  faker:
+    name:
+      girls_name: [Veerle, An, Ann, Lore]
+  
+    company:
+      suffix: [BVBA, NV, Group, en Zonen]
+
+    internet:
+      free_email: [gmail.com, yahoo.com, hotmail.com]
+      domain_suffix: [be, com, net, org]

@@ -1,9 +1,9 @@
 package faker
 
 class Config {
-	def locale = Locale.getDefault()
+	def static locale = Locale.getDefault()
 	
-	public void setLocale(Locale l) {
+	public static void setLocale(Locale l) {
 		this.locale = l
 		
 		Faker.reload()

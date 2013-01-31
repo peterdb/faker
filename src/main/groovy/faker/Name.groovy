@@ -1,28 +1,30 @@
 package faker
 
 
-class Name extends Faker.Base {
+class Name {
+	private static Faker.Base delegate = new Faker.Base(Name)
+
 	public static String name() {
-		return parse(Name, "name.name")
+		return delegate.parse('name.name')
 	}
 	
 	public static String firstName() {
-		return fetch("name.first_name")
+		return delegate.fetch('name.first_name')
 	}
 
 	public static String lastName() {
-		return fetch("name.last_name")
+		return delegate.fetch('name.last_name')
 	}
 
 	public static String prefix() {
-		return fetch("name.prefix")
+		return delegate.fetch('name.prefix')
 	}
 
 	public static String suffix() {
-		return fetch("name.suffix")
+		return delegate.fetch('name.suffix')
 	}
 
 	public static String title() {
-		return fetch('name.title.descriptor') + ' ' + fetch('name.title.level') + ' ' + fetch('name.title.job')
+		return delegate.fetch('name.title.descriptor') + ' ' + delegate.fetch('name.title.level') + ' ' + delegate.fetch('name.title.job')
 	}
 }

@@ -1,6 +1,7 @@
 package faker
 
-class Internet extends Faker.Base {
+class Internet {
+	private static Faker.Base delegate = new Faker.Base(Internet)
 	
 	private static IPv6_SPACE
 	
@@ -10,15 +11,15 @@ class Internet extends Faker.Base {
 	 * @return the generated email address
 	 */
 	public static String email(String name = null) {
-		[userName(name), domainName()].join('@')
+		return [userName(name), domainName()].join('@')
 	}
 	
 	public static String freeEmail(String name = null) {
-		[userName(name), fetch('internet.free_email') ].join('@')
+		return [userName(name), fetch('internet.free_email') ].join('@')
 	}
 	
 	public static String safeEmail(String name = null) {
-		[userName(name), 'example.'+ ["org", "com", "net"].sample()].join('@')
+		return [userName(name), 'example.'+ ["org", "com", "net"].sample()].join('@')
 	}
 
 	public static String userName(String name = null) {
@@ -33,7 +34,7 @@ class Internet extends Faker.Base {
 	}
 	  
 	public static String domainName() {
-		[fixUmlauts(domainWord()), domainSuffix() ].join('.')
+		return [fixUmlauts(domainWord()), domainSuffix() ].join('.')
 	}
 	
 	private static String fixUmlauts(String s) {
@@ -52,7 +53,7 @@ class Internet extends Faker.Base {
 	}
 	  
 	public static String domainSuffix() {
-		fetch('internet.domain_suffix')
+		return delegate.fetch('internet.domain_suffix')
 	}
 	  
 	public static String IPv4Address() {

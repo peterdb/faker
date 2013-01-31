@@ -1,17 +1,19 @@
 package faker
 
-class PhoneNumber extends Faker.Base {
+class PhoneNumber {
+	private static Faker.Base delegate = new Faker.Base(PhoneNumber)
+
 	public static String phoneNumber() {
-		numerify(fetch('phone_number.formats'))
+		return delegate.numerify(delegate.fetch('phone_number.formats'))
 	}
 
 	public static String cellPhone() {
-		def formats = translate("cell_phone.formats")
+		def formats = delegate.translate("cell_phone.formats")
 
 		if(formats) {
-			numerify(formats.sample())
+			return delegate.numerify(formats.sample())
 		} else {
-			numerify(fetch('phone_number.formats'))
+			return delegate.numerify(delegate.fetch('phone_number.formats'))
 		}
 	}
 }

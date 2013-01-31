@@ -15,4 +15,8 @@ class StringExtension {
 		}
 	}
 	
+	String chop() {
+		this[0..-2]
+	}
+	
 }

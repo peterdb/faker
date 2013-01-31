@@ -17,9 +17,8 @@ class MapBasedResourceBundle extends ResourceBundle {
 	}
 
 	public Enumeration<String> getKeys() {
-		// TODO
-		
-		return null
+		// not supported
+		throw new UnsupportedOperationException()
 	}
 
 	protected Object handleGetObject(String key) {

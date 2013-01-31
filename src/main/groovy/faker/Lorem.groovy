@@ -1,12 +1,14 @@
 package faker
 
-class Lorem extends Faker.Base {
+class Lorem {
+	private static Faker.Base delegate = new Faker.Base(Lorem)
+
 	public static String word() {
-		return translate('lorem.words').sample()
+		return delegate.translate('lorem.words').sample()
 	}
 
 	public static List words(int wordCount = 3, boolean supplemental = false) {
-		return (translate('lorem.words') + (supplemental ? translate('lorem.supplemental') : [])).shuffle()[0..<wordCount]
+		return (delegate.translate('lorem.words') + (supplemental ? delegate.translate('lorem.supplemental') : [])).shuffle()[0..<wordCount]
 	}
 	
 	public static List words(Range wordCount, boolean supplemental = false) {
@@ -23,7 +25,7 @@ class Lorem extends Faker.Base {
 	}
 
 	public static String sentence(int wordCount = 4, boolean supplemental = false) {
-		return words(wordCount + rnd.nextInt(6), supplemental).join(' ').capitalize() + '.'
+		return words(wordCount + delegate.rnd.nextInt(6), supplemental).join(' ').capitalize() + '.'
 	}
 	
 	public static String sentence(Range wordCount, boolean supplemental = false) {
@@ -39,7 +41,7 @@ class Lorem extends Faker.Base {
 	}
 
 	public static String paragraph(int sentenceCount = 3, supplemental = false) {
-		return sentences(sentenceCount + rnd.nextInt(3), supplemental).join(' ')
+		return sentences(sentenceCount + delegate.rnd.nextInt(3), supplemental).join(' ')
 	}
 
 	public static String paragraph(Range sentenceCount, supplemental = false) {

@@ -28,19 +28,6 @@ class Faker {
 	public static void reload() {
 		bundleHolder.bundle = null
 	}
-
-	static {
-		[Address, Company, Internet, Lorem, Name].each { Class fakerClass ->
-			// make all no-arg methods into properties
-			fakerClass.getDeclaredMethods().each { Method m ->
-				if(Modifier.isStatic(m.getModifiers()) && Modifier.isPublic(m.getModifiers()) && m.getParameterTypes().length == 0) {
-					String getter = ["get", m.name.capitalize()].join()
-					
-					fakerClass.metaClass.static."$getter" = { m.invoke(null) }
-				}
-			}
-		}
-	}
 	
 	public static class Base {
 		private static final List Numbers = 0..9
@@ -49,16 +36,33 @@ class Faker {
 		
 		protected static Random rnd = new Random()
 		
+		final Class fakerClass
+		
+		public Base(Class fakerClass) {
+			assert fakerClass != null
+			
+			this.fakerClass = fakerClass
+			
+			// example: add girls_name: [...] to a yml file, then you can call Name.girlsName or Name.girls_name
+			fakerClass.metaClass.static.methodMissing = { method, ignoredArgs ->
+				try {
+					fetch([fakerClass.simpleName.toLowerCase(), method].join("."))
+				} catch (MissingResourceException e) {
+					fetch([fakerClass.simpleName.toLowerCase(), unCamelCaseify(method)].join("."))
+				}
+			}
+		}
+		
 		/** 
 		 * Helper method for the common approach of a translation
 		 * with a list of values and selecting one of them
 		 */
-		protected static String fetch(String key) {
+		protected String fetch(String key) {
 			def fetched = translate(key)
 			
 			if(fetched instanceof List) {
 				// TODO fetch random item
-				fetched = fetched[rnd.nextInt(fetched.size)]
+				fetched = fetched.sample()
 			}
 			if(false /*fetched ==~ */) {
 				// TODO regexify
@@ -67,25 +71,48 @@ class Faker {
 			}
 		}
 		
-		protected static Object translate(String key) {
+		protected Object translate(String key) {
 			assert key, "key cannot be null or empty"
 			
-			try {
-				return Faker.bundleHolder.bundle.getObject("faker.$key")
-			} catch (MissingResourceException e) {
-				return ""
-			}
+			return Faker.bundleHolder.bundle.getObject("faker.$key")
 		}
 		
-		protected static String parse(Class caller, String key) {
-			Binding b = new Binding()
-			b.setVariable("delegate", caller)
-			GroovyShell sh = new GroovyShell(b)
+		protected String parse(String key) {
+			return fetch(key).scan(~/#\{([A-Za-z]+\.)?([^\}]+)\}([^#]+)?/).collect { matcher ->
+				evaluate(*matcher[1..-1])
+			}.join()
+		}
+		
+		private String evaluate(String klass, String method, String etc) {
+			// If the token had a class Prefix (e.g., Name.first_name) grab the constant, otherwise use self
+			Class target = klass ? Class.forName("faker.${klass.chop()}") : this.fakerClass
 			
-			def expression = fetch(key)
+			def text
 			
-			println expression
-			return sh.evaluate("import faker.*; delegate.with { ignore -> return \"$expression\"}")
+			// If the class has the method, call it, otherwise
+			// fetch the translation (i.e., faker.name.first_name)
+			def javaMethod = camelCaseify(method)
+			if(target.metaClass.respondsTo(target, javaMethod)) {
+				text = target.metaClass.invokeMethod(target, javaMethod, null)
+			} else {
+				text = fetch(target.simpleName.toLowerCase()+"."+method)
+			}
+			
+			return text + (etc ?: '')
+		}
+		
+		private static String camelCaseify(String s) {
+			def first = true
+			
+			s.split('_').collect { String it ->
+				def result = first ? it : it.capitalize()
+				first = false
+				return result
+			}.join()
+		}
+		
+		private static String unCamelCaseify(String s) {
+			return s.split("(?<!^)(?=[A-Z])").collect { it.toLowerCase() }.join('_')
 		}
 		
 //		# Given a regular expression, attempt to generate a string
@@ -107,7 +134,7 @@ class Faker {
 //		#
 //		# "U3V  3TP"
 //		#
-		public static String regexify(String re) {
+		public String regexify(String re) {
 			return re.
 				replaceAll(~/^\/?\^?/, '').replaceAll(~/\$?\/?$/, '').                                                                  // Ditch the anchors
 				replaceAll(~/\{(\d+)\}/, '{\1,\1}').replaceAll(~/\?/, '{0,1}').                                                             // All {2} become {2,2} and ? become {0,1}
@@ -121,23 +148,22 @@ class Faker {
 				replaceAll(~/\\w/) { Letters.sample() }
 		}
 		
-		public static String regexify(Pattern pattern) {
+		public String regexify(Pattern pattern) {
 			return regexify(pattern.toString())
 		}
 		
-		protected static String numerify(String numberString) {
+		protected String numerify(String numberString) {
 			// make sure numerify results doesn’t start with a zero
 			numberString.replaceFirst(~/#/) { rnd.nextInt(9) + 1 }.replaceAll(~/#/) { rnd.nextInt(10) }
 		}
 		
-		protected static String letterify(String letterString) {
+		protected String letterify(String letterString) {
 	    	return letterString.replaceAll(~/\?/) { ULetters.sample() }
 		}
 
-		protected static String bothify(String string) {
+		protected String bothify(String string) {
         	return letterify(numerify(string))
 		}
-		
 	}
 	
 }
