@@ -2,18 +2,24 @@ package internet
 
 import faker.Internet;
 
+description """
+In order to generate fake data
+As a developer
+I want to be able to create fake ip addresses
+"""
+
 scenario "ipv4",{
-    given "1000 ipv4 addresses", {
+    when "I call Internet.IPv4Address()", {
         ips = (1..1000).collect { Internet.IPv4Address() }
     }
     
-    then "they consist of 4 parts", {
+    then "the output should consist of 4 parts", {
         ips.each { ip ->
             ip.split('\\.').size().shouldBe 4
         }
     }
     
-    then "and each part is an octet", {
+    and "each part must be an octet", {
         ips.each { ip ->
             assert ip.split('\\.').collect { octet -> octet as int }.max() <= 255
         }
@@ -21,17 +27,17 @@ scenario "ipv4",{
 }
 
 scenario "ipv6",{
-    given "1000 ipv6 addresses", {
+    given "I call Internet.IPv6Address()", {
         ips = (1..1000).collect { Internet.IPv6Address() }
     }
     
-    then "they exist of 8 parts", {
+    then "the output should consist of 8 parts", {
         ips.each { ip ->
             ip.split(":").size().shouldBe 8
         }
     }
     
-    then "and each part is a valid hex", {
+    and "each part must be a hex value", {
         ips.each { ip ->
             assert ip.split(':').collect { hex -> Integer.parseInt(hex, 16) }.max() <= 65535
         }
