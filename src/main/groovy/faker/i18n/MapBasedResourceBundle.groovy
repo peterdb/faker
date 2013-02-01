@@ -10,24 +10,24 @@ import java.util.ResourceBundle;
  */
 class MapBasedResourceBundle extends ResourceBundle {
 
-	final Map<String, Object> map
+    final Map<String, Object> map
 
-	public MapBasedResourceBundle(Map<String, Object> map) {
-		this.map = map
-	}
+    public MapBasedResourceBundle(Map<String, Object> map) {
+        this.map = map
+    }
 
-	public Enumeration<String> getKeys() {
-		// not supported
-		throw new UnsupportedOperationException()
-	}
+    public Enumeration<String> getKeys() {
+        // not supported
+        throw new UnsupportedOperationException()
+    }
 
-	protected Object handleGetObject(String key) {
-		def tmp = map
-		
-		key.split("\\.").each { it ->
-			tmp = tmp?.get(it)
-		}
+    protected Object handleGetObject(String key) {
+        def tmp = map
+        
+        key.split("\\.").each { it ->
+            tmp = tmp?.get(it)
+        }
 
-		return tmp
-	}
+        return tmp
+    }
 }
