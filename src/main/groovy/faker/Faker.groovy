@@ -48,7 +48,11 @@ class Faker {
 				try {
 					fetch([fakerClass.simpleName.toLowerCase(), method].join("."))
 				} catch (MissingResourceException e) {
-					fetch([fakerClass.simpleName.toLowerCase(), unCamelCaseify(method)].join("."))
+					try {
+						fetch([fakerClass.simpleName.toLowerCase(), unCamelCaseify(method)].join("."))
+					} catch (MissingResourceException e2) {
+						throw new MissingMethodException(method, fakerClass, ignoredArgs, true)
+					}
 				}
 			}
 		}
