@@ -1,0 +1,13 @@
+package shared
+
+shared_behavior "locale", {
+}
+
+before "set the locale to en", {
+    origLocale = Locale.getDefault()
+    Locale.setDefault(Locale.ENGLISH)
+}
+
+after "restore the locale",{
+    Locale.setDefault(origLocale)
+}
