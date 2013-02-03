@@ -2,11 +2,13 @@ package internet
 
 import faker.Internet;
 
-description """
-In order to generate fake data
-As a developer
-I want to be able to create fake ip addresses
-"""
+shared_stories "../shared/stories.shared"
+
+
+narrative 'domain names', {
+    as_a 'developer'
+    i_want 'to be able to create fake ip addresses'
+}
 
 scenario "ipv4",{
     when "I call Internet.IPv4Address()", {

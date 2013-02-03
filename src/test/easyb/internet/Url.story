@@ -1,17 +1,16 @@
 package internet
 
 import faker.Internet;
-import "shared".stories;
 
-description """
-In order to generate fake data
-As a developer
-I want to be able to create fake urls
-"""
+shared_stories "../shared/stories.shared"
+
+
+narrative 'url', {
+	as_a 'developer'
+	i_want 'to be able to generate fake urls'
+}
 
 scenario "url", {
-    it_behaves_as "shared/stories"
-    
     when "I call Internet.url()", {
         url = Internet.url()
     }
@@ -22,7 +21,7 @@ scenario "url", {
 }
 
 scenario "slug with no words or glue",{
-    when "I call Internet.slug()",{
+	when "I call Internet.slug()",{
         slug = Internet.slug()
     }
     
@@ -32,7 +31,7 @@ scenario "slug with no words or glue",{
 }
 
 scenario "slug with custom glue",{
-    when "I call Internet.slug(null, '+')",{
+	when "I call Internet.slug(null, '+')",{
         slug = Internet.slug(null, '+')
     }
     
@@ -42,7 +41,7 @@ scenario "slug with custom glue",{
 }
 
 scenario "slug with words, no glue",{
-    when "I call Internet.slug('Foo bAr baZ')",{
+	when "I call Internet.slug('Foo bAr baZ')",{
         slug = Internet.slug("Foo bAr baZ")
     }
     

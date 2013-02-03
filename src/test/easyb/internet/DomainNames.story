@@ -2,11 +2,12 @@ package internet
 
 import faker.Internet;
 
-description """
-In order to generate fake data
-As a developer
-I want to be able to create fake domain names
-"""
+shared_stories "../shared/stories.shared"
+
+narrative 'domain names', {
+    as_a 'developer'
+    i_want 'to be able to create fake domain names'
+}
 
 scenario "domain name",{
     given "a generated domain name", {

@@ -2,13 +2,13 @@ package internet
 
 import faker.Internet;
 
-description """
-In order to generate fake data
-As a developer
-I want to be able to create fake email addresses
-"""
+shared_stories "../shared/stories.shared"
 
-description "random email: random domain name and tld"
+
+narrative 'email addresses', {
+    as_a 'developer'
+    i_want 'to be able to create fake email addresses'
+}
 
 scenario "generate random email without a name", {
     when "email is generated", {
