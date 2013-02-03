@@ -2,7 +2,13 @@ package internet
 
 import faker.Internet;
 
-description "Generating user names"
+shared_stories "../shared/stories.shared"
+
+
+narrative 'domain names', {
+    as_a 'developer'
+    i_want 'to be able to create fake user names'
+}
 
 scenario "user name with no name",{
     when "a username is generated without a name",{

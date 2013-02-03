@@ -2,15 +2,19 @@ package address
 
 
 import faker.Address
+
 import faker.Faker;
 import faker.i18n.I18n
 import faker.i18n.MapBasedResourceBundle
 
-description """
-In order to generate fake data
-As a developer
-I want to be able to create fake cities
-"""
+
+shared_stories "../shared/stories.shared"
+
+
+narrative 'cities', {
+    as_a 'developer'
+    i_want 'to be able to create fake cities'
+}
 
 scenario "default city formats", {
     given "minimal resource bundle for testing", {

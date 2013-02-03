@@ -15,7 +15,7 @@ class Internet {
     }
     
     public static String freeEmail(String name = null) {
-        return [userName(name), fetch('internet.free_email') ].join('@')
+        return [userName(name), delegate.fetch('internet.free_email') ].join('@')
     }
     
     public static String safeEmail(String name = null) {
