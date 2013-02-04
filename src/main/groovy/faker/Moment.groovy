@@ -14,17 +14,6 @@ import groovy.time.TimeDuration;
 class Moment {
     private static Faker.Base delegate = new Faker.Base(Moment)
 
-    public static void main(String[] args) {
-        use(TimeCategory) {
-            10.times { println Moment.date() }
-            println "----"
-            println Moment.date(2.years.ago)
-            println Moment.date(1.year.ago, 1.year.from.now)
-            
-            println Moment.time(1.hour, 2.hours)
-        }
-    }
-
     // after is arbitrarily set to 1/1/1970 if not explicitly given
     // before is set to today if not set
     // both are inclusive
