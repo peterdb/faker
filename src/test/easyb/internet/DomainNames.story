@@ -9,32 +9,32 @@ narrative 'domain names', {
     i_want 'to be able to create fake domain names'
 }
 
-scenario "domain name",{
-    given "a generated domain name", {
+scenario "domain name", {
+    when "I call Internet.domainName()", {
         domainName = Internet.domainName()
     }
     
-    then "it is valid", {
+    then "the output should be a valid domain name", {
         assert domainName ==~ /\w+\.\w+/
     }
 }
 
-scenario "domain word",{
-    given "a generated domain word", {
+scenario "domain word", {
+    given "I call Internet.domainWord()", {
         domainWord = Internet.domainWord()
     }
     
-    then "it is valid", {
+    then "the output should be a valid word", {
         assert domainWord ==~ /^\w+$/
     }
 }
 
 scenario "domain suffix",{
-    given "a generated domain suffix", {
+    when "I call Internet.domainSuffix()", {
         domainSuffix = Internet.domainSuffix()
     }
     
-    then "it is valid", {
+    then "it is a valid domain suffix", {
         assert domainSuffix ==~ /^\w+(\.\w+)?/
     }
 }
