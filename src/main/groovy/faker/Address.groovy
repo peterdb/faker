@@ -59,11 +59,11 @@ class Address {
         return delegate.fetch('address.country')
     }
 
-    public static String latitude() {
+    public static Double latitude() {
         return (delegate.rnd.nextDouble() * 180) - 90
     }
 
-    public static String longitude() {
+    public static Double longitude() {
         return (delegate.rnd.nextDouble() * 360) - 180
     }
 }
