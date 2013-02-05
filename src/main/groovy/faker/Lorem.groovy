@@ -6,12 +6,16 @@ class Lorem {
     public static String word() {
         return delegate.translate('lorem.words').sample()
     }
+    
+    public static List words(boolean supplemental = false) {
+        return words(3, supplemental)
+    }
 
-    public static List words(int wordCount = 3, boolean supplemental = false) {
-        return (delegate.translate('lorem.words') + (supplemental ? delegate.translate('lorem.supplemental') : [])).shuffle()[0..<wordCount]
+    public static List words(int wordCount, boolean supplemental = false) {
+        return (delegate.translate('lorem.words') + (supplemental ? delegate.translate('lorem.supplemental') : [])).sample(wordCount)
     }
     
-    public static List words(Range wordCount, boolean supplemental = false) {
+    public static List words(List wordCount, boolean supplemental = false) {
         return words(wordCount.sample(), supplemental)
     }
 
@@ -20,39 +24,55 @@ class Lorem {
         return alphabet.sample(charCount).join()        
     }
     
-    public static String characters(Range charCount) {
+    public static String characters(List charCount) {
         return characters(charCount.sample())
     }
+    
+    public static String sentence(boolean supplemental = false) {
+        return sentence(4..10, supplemental)
+    }
 
-    public static String sentence(int wordCount = 4, boolean supplemental = false) {
-        return words(wordCount + delegate.rnd.nextInt(6), supplemental).join(' ').capitalize() + '.'
+    public static String sentence(int wordCount, boolean supplemental = false) {
+        return words(wordCount, supplemental).join(' ').capitalize() + '.'
     }
     
-    public static String sentence(Range wordCount, boolean supplemental = false) {
+    public static String sentence(List wordCount, boolean supplemental = false) {
         return sentence(wordCount.sample(), supplemental)
     }
 
-    public static List sentences(int sentenceCount = 3, supplemental = false) {
+    public static List sentences(boolean supplemental = false) {
+        return sentences(3, supplemental)
+    }
+    
+    public static List sentences(int sentenceCount, boolean supplemental = false) {
         return (1..sentenceCount).collect { sentence(4, supplemental) }
     }
     
-    public static List sentences(Range sentenceCount, supplemental = false) {
+    public static List sentences(List sentenceCount, boolean supplemental = false) {
         return sentences(sentenceCount.sample())
     }
 
-    public static String paragraph(int sentenceCount = 3, supplemental = false) {
-        return sentences(sentenceCount + delegate.rnd.nextInt(3), supplemental).join(' ')
+    public static String paragraph(boolean supplemental = false) {
+        return paragraph(3..6, supplemental)
+    }
+    
+    public static String paragraph(List sentenceCount, boolean supplemental = false) {
+        return paragraph(sentenceCount.sample())
+    }
+    
+    public static String paragraph(int sentenceCount, boolean supplemental = false) {
+        return sentences(sentenceCount, supplemental).join(' ')
     }
 
-    public static String paragraph(Range sentenceCount, supplemental = false) {
-        return sentences(sentenceCount.sample())
+    public static List paragraphs(boolean supplemental = false) {
+        return paragraphs(3, supplemental)
     }
 
-    public static List paragraphs(int paragraphCount = 3, supplemental = false) {
+    public static List paragraphs(int paragraphCount, boolean supplemental = false) {
         return (1..paragraphCount).collect { paragraph(3, supplemental) }
     }    
 
-    public static List paragraphs(Range paragraphCount, supplemental = false) {
+    public static List paragraphs(List paragraphCount, boolean supplemental = false) {
       return paragraphs(paragraphCount.sample(), supplemental)
     }
 }
