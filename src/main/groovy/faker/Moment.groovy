@@ -19,21 +19,27 @@ class Moment {
     // both are inclusive
     /**
      * 
-     * @return a {@link Date} between <code>after</code> and before <code>before</code>
+     * @param after
+     * @param before
+     * 
+     * @return a {@link Date} between <code>after</code> and <code>before</code>
      */
     public static Date date(Date after = null, Date before = null) {
+        if(!after) {
+            after = new Date(0L)
+        }
+
+        if(!before) {
+            before = new Date()
+        }
+        
+        assert after <= before
+        
+        after.clearTime()
+        before.clearTime()
+
         use(TimeCategory) {
-            if(!after) {
-                after = d(1970, Calendar.JANUARY, 1)
-            }
-
-            if(!before) {
-                before = new Date()
-            }
-
-            Duration duration = before - after
-
-            return toDay(after) + Moment.delegate.rnd.nextInt(duration.days + 1)
+            return after + Moment.delegate.rnd.nextInt((before - after).days + 1)
         }
     }
 
