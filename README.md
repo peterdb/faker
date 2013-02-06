@@ -44,3 +44,7 @@ This project uses the following technologies:
 - yaml: data format
 
 If you make changes, please include an easyb test.
+
+License
+----
+This code is free to use under the terms of the MIT license.
