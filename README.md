@@ -33,6 +33,12 @@ Ruby Faker yml files
 ----
 yml files from Ruby Faker can be used as is (as a matter of fact, the yml files included in this project are the Ruby Faker ones). Underscore-style names (e.g. first_name) are automatically converted to camelcase-style names (e.g. firstName) to make this work.
 
+Build
+----
+Faker uses [maven](http://maven.apache.org/download.html "maven").
+
+    mvn clean install
+
 Contributing
 ----
 If you'd like to contribute code or formats/data for another locale, fork the project at github, make your changes, then send a pull request.
