@@ -88,7 +88,7 @@ class Strings {
      * @return the string
      */
     public static String string(List<Integer> length, List characters) {
-        return from(length.sample(), characters)
+        return string(length.sample(), characters)
     }
     
     // TODO move regexify to here, and use automaton (http://www.brics.dk/automaton) for string generation
