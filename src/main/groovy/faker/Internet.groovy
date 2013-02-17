@@ -1,7 +1,9 @@
 package faker
 
+import faker.internal.FakerSupport;
+
 class Internet {
-    private static Faker.Base delegate = new Faker.Base(Internet)
+    private static FakerSupport support = new FakerSupport(Internet)
     
     private static IPv6_SPACE
     
@@ -15,7 +17,7 @@ class Internet {
     }
     
     public static String freeEmail(String name = null) {
-        return [userName(name), delegate.fetch('internet.free_email') ].join('@')
+        return [userName(name), support.fetch('internet.free_email') ].join('@')
     }
     
     public static String safeEmail(String name = null) {
@@ -53,7 +55,7 @@ class Internet {
     }
       
     public static String domainSuffix() {
-        return delegate.fetch('internet.domain_suffix')
+        return support.fetch('internet.domain_suffix')
     }
       
     public static String IPv4Address() {

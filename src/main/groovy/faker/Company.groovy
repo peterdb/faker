@@ -1,25 +1,35 @@
 package faker
 
+import faker.internal.FakerSupport;
+
 
 class Company {
-    private static Faker.Base delegate = new Faker.Base(Company)
+    private static FakerSupport support = new FakerSupport(Company)
     
     public static String name() {
-        delegate.parse('company.name')
+        support.parse('company.name')
     }
 
     public static String suffix() {
-        delegate.fetch('company.suffix')
+        support.fetch('company.suffix')
     }
 
-    // Generate a buzzword-laden catch phrase.
+    /**
+     * Generate a buzzword-laden catch phrase.
+     * 
+     * @return a catch phrase
+     */
     public static String catchPhrase() {
-        delegate.translate('company.buzzwords').collect { list -> list.sample() }.join(' ')
+        support.translate('company.buzzwords').collect { list -> list.sample() }.join(' ')
     }
 
-    // When a straight answer won't do, BS to the rescue!
+    /**
+     * When a straight answer won't do, BS to the rescue!
+     * 
+     * @return bs
+     */
     public static String bs() {
-        delegate.translate('company.bs').collect { list -> list.sample() }.join(' ')
+        support.translate('company.bs').collect { list -> list.sample() }.join(' ')
     }
 
 }

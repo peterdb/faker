@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import faker.internal.groovy.I18nMethods;
+
 class I18nTest {
 
     @Test
@@ -13,7 +15,7 @@ class I18nTest {
         
         assert nl_BE == Locale.getDefault(), "sanity check fails"
         
-        def result = I18n.withLocale(Locale.ENGLISH) {
+        def result = I18nMethods.localized(Locale.ENGLISH) {
             assert Locale.ENGLISH == Locale.getDefault(), "locale not changed for closure"
             
             return "finished"
@@ -32,7 +34,7 @@ class I18nTest {
         assert nl_BE == Locale.getDefault(), "sanity check fails"
         
         try {
-            I18n.withLocale(Locale.ENGLISH) {
+            I18nMethods.localized(Locale.ENGLISH) {
                 assert Locale.ENGLISH == Locale.getDefault(), "locale not changed for closure"
                 
                 throw new RuntimeException("closure fail")

@@ -1,27 +1,29 @@
 package faker
 
+import faker.internal.FakerSupport;
+
 
 class Address {
-    private static Faker.Base delegate = new Faker.Base(Address)
+    private static FakerSupport support = new FakerSupport(Address)
 
     public static String city() {
-        return delegate.parse('address.city')
+        return support.parse('address.city')
     }
 
     public static String streetName() {
-        return delegate.parse('address.street_name')
+        return support.parse('address.street_name')
     }
 
     public static String streetAddress(include_secondary = false) {
-        return delegate.numerify(delegate.parse('address.street_address') + (include_secondary ? ' ' + secondaryAddress() : ''))
+        return support.numerify(support.parse('address.street_address') + (include_secondary ? ' ' + secondaryAddress() : ''))
     }
 
     public static String secondaryAddress() {
-        return delegate.numerify(delegate.fetch('address.secondary_address'))
+        return support.numerify(support.fetch('address.secondary_address'))
     }
 
     public static String buildingNumber() {
-        return delegate.bothify(delegate.fetch('address.building_number'))
+        return support.bothify(support.fetch('address.building_number'))
     }
 
     public static String zip() {
@@ -33,37 +35,37 @@ class Address {
     }
 
     public static String zipCode() {
-        return delegate.bothify(delegate.fetch('address.postcode'))
+        return support.bothify(support.fetch('address.postcode'))
     }
 
     public static String timeZone() {
-        return delegate.bothify(delegate.fetch('address.time_zone'))
+        return support.bothify(support.fetch('address.time_zone'))
     }
 
     public static String streetSuffix() {
-        return delegate.fetch('address.street_suffix')
+        return support.fetch('address.street_suffix')
     }
     public static String citySuffix() {
-        return delegate.fetch('address.city_suffix')
+        return support.fetch('address.city_suffix')
     }
     public static String cityPrefix() {
-        return delegate.fetch('address.city_prefix')
+        return support.fetch('address.city_prefix')
     }
     public static String stateAbbr() {
-        return delegate.fetch('address.state_abbr')
+        return support.fetch('address.state_abbr')
     }
     public static String state() {
-        return delegate.fetch('address.state')
+        return support.fetch('address.state')
     }
     public static String country() {
-        return delegate.fetch('address.country')
+        return support.fetch('address.country')
     }
 
     public static Double latitude() {
-        return (delegate.rnd.nextDouble() * 180) - 90
+        return (support.rnd.nextDouble() * 180) - 90
     }
 
     public static Double longitude() {
-        return (delegate.rnd.nextDouble() * 360) - 180
+        return (support.rnd.nextDouble() * 360) - 180
     }
 }

@@ -2,6 +2,7 @@ package faker
 
 import java.util.Date;
 
+import faker.internal.FakerSupport;
 import groovy.time.Duration;
 import groovy.time.TimeCategory;
 import groovy.time.TimeDuration;
@@ -9,10 +10,10 @@ import groovy.time.TimeDuration;
 /**
  * Faker for dates and times.
  * 
- * @author peterdb
+ * @author peter
  */
 class Moment {
-    private static Faker.Base delegate = new Faker.Base(Moment)
+    private static FakerSupport support = new FakerSupport(Moment)
 
     // after is arbitrarily set to 1/1/1970 if not explicitly given
     // before is set to today if not set
@@ -39,7 +40,7 @@ class Moment {
         before.clearTime()
 
         use(TimeCategory) {
-            return after + Moment.delegate.rnd.nextInt((before - after).days + 1)
+            return after + Moment.support.rnd.nextInt((before - after).days + 1)
         }
     }
 
@@ -49,7 +50,7 @@ class Moment {
         use(TimeCategory) {
             Duration interval = before - after
 
-            return toDay(onDate) + after + Moment.delegate.rnd.nextInt((int)(interval.toMilliseconds()/1000) + 1).seconds
+            return toDay(onDate) + after + Moment.support.rnd.nextInt((int)(interval.toMilliseconds()/1000) + 1).seconds
         }
     }
     
@@ -69,7 +70,7 @@ class Moment {
 
             def interval = before - after
 
-            return toDay(onDate) + after.seconds + Moment.delegate.rnd.nextInt(interval + 1).seconds
+            return toDay(onDate) + after.seconds + Moment.support.rnd.nextInt(interval + 1).seconds
         }
     }
     

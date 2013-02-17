@@ -1,4 +1,4 @@
-package faker.groovy
+package faker.internal.groovy
 
 @Category(List)
 class ListExtension {

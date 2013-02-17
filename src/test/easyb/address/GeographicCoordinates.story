@@ -4,8 +4,8 @@ package address
 import faker.Address
 
 import faker.Faker;
-import faker.i18n.I18n
 import faker.i18n.MapBasedResourceBundle
+import faker.internal.groovy.I18nMethods;
 
 
 shared_stories "../shared/stories.shared"

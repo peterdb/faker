@@ -4,8 +4,8 @@ package address
 import faker.Address
 
 import faker.Faker;
-import faker.i18n.I18n
 import faker.i18n.MapBasedResourceBundle
+import faker.internal.groovy.I18nMethods;
 
 
 shared_stories "../shared/stories.shared"
@@ -29,12 +29,12 @@ scenario "default city formats", {
             ]]
         
         def bundle = new MapBasedResourceBundle(xx)
-        bundle.parent = Faker.bundleHolder.bundle
-        Faker.bundleHolder.bundle = bundle
+        bundle.parent = Faker.bundles[0]
+        Faker.bundles[0] = bundle
     }
     
     when "cities are created", {
-        I18n.withLocale(new Locale("xx")) {
+        localized(new Locale("xx")) {
             cities = (1..100).collect { Address.city() }
         }
     }

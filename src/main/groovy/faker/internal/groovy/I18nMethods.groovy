@@ -1,11 +1,11 @@
-package faker.i18n
+package faker.internal.groovy
 
-class I18n {
+class I18nMethods {
 
     /**
      * Method for easier working with locales
      */
-    static withLocale(Locale locale, Closure closure) {
+    static localized(Object selfType, Locale locale, Closure closure) {
         assert locale, "locale cannot be null"
         assert closure, "closure cannot be null"
         
