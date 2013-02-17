@@ -1,19 +1,21 @@
 package faker
 
+import faker.internal.FakerSupport;
+
 class PhoneNumber {
-    private static Faker.Base delegate = new Faker.Base(PhoneNumber)
+    private static FakerSupport support = new FakerSupport(PhoneNumber)
 
     public static String phoneNumber() {
-        return delegate.numerify(delegate.fetch('phone_number.formats'))
+        return support.numerify(support.fetch('phone_number.formats'))
     }
 
     public static String cellPhone() {
-        def formats = delegate.translate("cell_phone.formats")
+        def formats = support.translate("cell_phone.formats")
 
         if(formats) {
-            return delegate.numerify(formats.sample())
+            return support.numerify(formats.sample())
         } else {
-            return delegate.numerify(delegate.fetch('phone_number.formats'))
+            return support.numerify(support.fetch('phone_number.formats'))
         }
     }
 }

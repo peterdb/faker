@@ -1,10 +1,12 @@
 package faker
 
+import faker.internal.FakerSupport;
+
 class Lorem {
-    private static Faker.Base delegate = new Faker.Base(Lorem)
+    private static FakerSupport support = new FakerSupport(Lorem)
 
     public static String word() {
-        return delegate.translate('lorem.words').sample()
+        return support.translate('lorem.words').sample()
     }
     
     public static List words(boolean supplemental = false) {
@@ -12,7 +14,7 @@ class Lorem {
     }
 
     public static List words(int wordCount, boolean supplemental = false) {
-        return (delegate.translate('lorem.words') + (supplemental ? delegate.translate('lorem.supplemental') : [])).sample(wordCount)
+        return (support.translate('lorem.words') + (supplemental ? support.translate('lorem.supplemental') : [])).sample(wordCount)
     }
     
     public static List words(List wordCount, boolean supplemental = false) {

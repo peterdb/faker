@@ -1,4 +1,4 @@
-package faker.groovy
+package faker.internal.groovy
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

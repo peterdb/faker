@@ -13,21 +13,16 @@ class MapBasedResourceBundle extends ResourceBundle {
     final Map<String, Object> map
 
     public MapBasedResourceBundle(Map<String, Object> map) {
+        assert map != null, "map cannot be null"
+        
         this.map = map
     }
 
     public Enumeration<String> getKeys() {
-        // not supported
-        throw new UnsupportedOperationException()
+        return map.keySet().iterator() as Enumeration
     }
 
     protected Object handleGetObject(String key) {
-        def tmp = map
-        
-        key.split("\\.").each { it ->
-            tmp = tmp?.get(it)
-        }
-
-        return tmp
+        return map[key]
     }
 }
