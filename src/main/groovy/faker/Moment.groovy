@@ -69,9 +69,6 @@ class Moment {
         assert age >= 0
         
         use(TimeCategory) {
-            println ((age + 1).years.ago + 1.day)
-            println (age.years.ago)
-            
             return date((age + 1).years.ago + 1.day, age.years.ago)
         }
     }
