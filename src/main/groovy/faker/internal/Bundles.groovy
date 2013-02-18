@@ -12,7 +12,7 @@ class Bundles {
         }
     }
 
-    private Object find(def bundle, String key) {
+    private static Object find(def bundle, String key) {
         def result = bundle
 
         key.split("\\.").each { it ->
