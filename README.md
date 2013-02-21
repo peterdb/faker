@@ -21,7 +21,7 @@ Internationalization
 ----
 Faker uses ResourceBundles to organize strings (like first names) and formats (postal codes), allowing you to get different results by switching locales.
 
-For example: the following code fragment changes the locale to spanish.
+For example: the following code fragment changes the locale to french.
 
 ```groovy
 import faker.*
