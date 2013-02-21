@@ -26,7 +26,7 @@ For example: the following code fragment changes the locale to spanish.
 ```groovy
 import faker.*
 
-Config.locale = new Locale("es")
+Faker.locale = Locale.FRENCH
 ```
 
 Ruby Faker yml files
