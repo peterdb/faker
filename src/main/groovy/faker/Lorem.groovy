@@ -20,15 +20,6 @@ class Lorem {
     public static List words(List wordCount, boolean supplemental = false) {
         return words(wordCount.sample(), supplemental)
     }
-
-    public static String characters(int charCount = 255) {
-        def alphabet = ('a'..'z') + ('A'..'Z') + (0..9)
-        return alphabet.sample(charCount).join()        
-    }
-    
-    public static String characters(List charCount) {
-        return characters(charCount.sample())
-    }
     
     public static String sentence(boolean supplemental = false) {
         return sentence(4..10, supplemental)

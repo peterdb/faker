@@ -1,6 +1,6 @@
 package faker.internal.groovy
 
-class ListExtension {
+public class ListExtension {
     private static final Random rnd = new Random()
     
     /**

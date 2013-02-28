@@ -10,65 +10,19 @@ import faker.internal.groovy.I18nMethods;
 
 shared_stories "../shared/stories.shared"
 
-
-narrative 'cities', {
+narrative 'geographic coordinates', {
     as_a 'developer'
-    i_want 'to be able to create fake cities'
+    i_want 'to be able to create city names'
 }
 
 scenario "default city formats", {
-    given "minimal resource bundle for testing", {
-        xx = [
-            faker: [
-                name: [
-                    first_name : ['alice'], 
-                    last_name: ['smith']],
-                address: [
-                    city_prefix: ['west'],
-                    city_suffix: ['burg']]
-            ]]
-        
-        def bundle = new MapBasedResourceBundle(xx)
-        bundle.parent = Faker.bundles[0]
-        Faker.bundles[0] = bundle
+    when "I call Address.city()", {
+        cities = (1..100).collect { Address.city() }
     }
     
-    when "cities are created", {
-        localized(new Locale("xx")) {
-            cities = (1..100).collect { Address.city() }
-        }
-    }
-    
-    then "consisting", {
+    then "the output should be a valid city name", {
         cities.each { city -> 
-            def expected = ["west alice", "west smith", "west aliceburg", "west smithburg", "aliceburg", "smithburg"]
-            assert expected.contains(city), "Expected <${expected.join(' / ')}>, but got ${city}"
+            assert city ==~ /.+/
         }
-    }
-}
-
-scenario "city formats are flexible", {
-    given "minimal resource bundle for testing", {
-        xy = [
-            faker: [
-                address: [
-                    city_prefix: ['big'],
-                    city_root: ['rock'],
-                    city_root_suffix: ['ing'],
-                    city_suffix: ['town'],
-                    city: ['#{city_prefix} #{city_root}#{city_root_suffix} #{city_suffix}']
-                    ]]]
-        
-        def bundle = new MapBasedResourceBundle(xy)
-        bundle.parent = Faker.bundleHolder.bundle
-        Faker.bundleHolder.bundle = bundle
-    }
-    
-    when "cities are created", {
-        city = Address.city()
-    }
-    
-    then "consisting", {
-        assert "big rocking town" == city
     }
 }
