@@ -13,8 +13,8 @@ import groovy.time.TimeDuration;
  * @author peter
  */
 class Moment {
-    private static FakerSupport support = new FakerSupport(Moment)
-
+    private static FakerSupport support = new FakerSupport(Lorem)
+    
     // after is arbitrarily set to 1/1/1970 if not explicitly given
     // before is set to today if not set
     // both are inclusive

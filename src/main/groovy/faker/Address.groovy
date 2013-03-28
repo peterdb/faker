@@ -7,23 +7,23 @@ class Address {
     private static FakerSupport support = new FakerSupport(Address)
 
     public static String city() {
-        return support.parse('address.city')
+        return support.getString('address.city')
     }
 
     public static String streetName() {
-        return support.parse('address.street_name')
+        return support.getString('address.street_name')
     }
 
     public static String streetAddress(include_secondary = false) {
-        return support.numerify(support.parse('address.street_address') + (include_secondary ? ' ' + secondaryAddress() : ''))
+        return support.getString('address.street_address') + (include_secondary ? ' ' + secondaryAddress() : '')
     }
 
     public static String secondaryAddress() {
-        return support.numerify(support.fetch('address.secondary_address'))
+        return support.getString('address.secondary_address')
     }
 
     public static String buildingNumber() {
-        return support.bothify(support.fetch('address.building_number'))
+        return support.getString('address.building_number')
     }
 
     public static String zip() {
@@ -35,30 +35,30 @@ class Address {
     }
 
     public static String zipCode() {
-        return support.bothify(support.fetch('address.postcode'))
+        return support.getString('address.postcode')
     }
 
     public static String timeZone() {
-        return support.bothify(support.fetch('address.time_zone'))
+        return support.getString('address.time_zone')
     }
 
     public static String streetSuffix() {
-        return support.fetch('address.street_suffix')
+        return support.getString('address.street_suffix')
     }
     public static String citySuffix() {
-        return support.fetch('address.city_suffix')
+        return support.getString('address.city_suffix')
     }
     public static String cityPrefix() {
-        return support.fetch('address.city_prefix')
+        return support.getString('address.city_prefix')
     }
     public static String stateAbbr() {
-        return support.fetch('address.state_abbr')
+        return support.getString('address.state_abbr')
     }
     public static String state() {
-        return support.fetch('address.state')
+        return support.getString('address.state')
     }
     public static String country() {
-        return support.fetch('address.country')
+        return support.getString('address.country')
     }
 
     public static Double latitude() {

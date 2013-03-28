@@ -19,7 +19,7 @@
 			<artifactId>snakeyaml</artifactId>
 			<version>1.8</version>
 		</dependency>
-
+		
 		<!-- for testing -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -31,12 +31,6 @@
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-core</artifactId>
 			<version>0.7-groovy-2.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.easyb</groupId>
-			<artifactId>easyb-core</artifactId>
-			<version>1.5</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -68,7 +62,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/test/easyb</source>
+								<source>src/test/groovy</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -99,18 +93,6 @@
 				<extensions>true</extensions>
 			</plugin>
 			<plugin>
-				<groupId>org.easyb</groupId>
-				<artifactId>maven-easyb-plugin</artifactId>
-				<version>1.4</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.spockframework</groupId>
 				<artifactId>spock-maven</artifactId>
 				<version>0.6-groovy-1.8</version>
@@ -124,20 +106,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<!-- for easyb -->
-	<repositories>
-		<repository>
-			<id>sonatype-snapshots</id>
-			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>sonatype-plugin-snapshots</id>
-			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

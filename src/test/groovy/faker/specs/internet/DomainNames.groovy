@@ -1,8 +1,8 @@
 package faker.specs.internet
 
-import spock.lang.Specification;
-import faker.Internet;
-import faker.specs.support.Localized;
+import spock.lang.Specification
+import faker.Internet
+import faker.specs.support.Localized
 
 @Localized
 class DomainNames extends Specification {

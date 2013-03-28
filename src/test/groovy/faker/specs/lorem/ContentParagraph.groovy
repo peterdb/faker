@@ -1,9 +1,9 @@
 package faker.specs.lorem
 
-import spock.lang.Specification;
-import faker.Faker;
-import faker.Lorem;
-import faker.specs.support.Localized;
+import spock.lang.Specification
+import faker.Faker
+import faker.Lorem
+import faker.specs.support.Localized
 
 @Localized
 class ContentParagraph extends Specification {
@@ -12,8 +12,8 @@ class ContentParagraph extends Specification {
     def static completeWordList
 
     def setupSpec() {
-        standardWordList = Faker.bundles["faker.lorem.words"]
-        completeWordList = standardWordList + Faker.bundles["faker.lorem.supplemental"]
+        standardWordList = Faker.bundle["faker.lorem.words"]
+        completeWordList = standardWordList + Faker.bundle["faker.lorem.supplemental"]
     }
 
     def "paragraph content, from standard word list"(def p) {

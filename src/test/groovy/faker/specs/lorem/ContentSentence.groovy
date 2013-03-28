@@ -13,8 +13,8 @@ class ContentSentence extends Specification {
     def static completeWordList
 
     def setupSpec() {
-        standardWordList = Faker.bundles["faker.lorem.words"]
-        completeWordList = standardWordList + Faker.bundles["faker.lorem.supplemental"]
+        standardWordList = Faker.bundle["faker.lorem.words"]
+        completeWordList = standardWordList + Faker.bundle["faker.lorem.supplemental"]
     }
 
     def "sentence content, from standard word list"(def sentence) {

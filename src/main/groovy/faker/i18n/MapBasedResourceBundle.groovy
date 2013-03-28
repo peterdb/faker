@@ -23,6 +23,12 @@ class MapBasedResourceBundle extends ResourceBundle {
     }
 
     protected Object handleGetObject(String key) {
-        return map[key]
+        def result = map
+
+        key.split("\\.").each { it ->
+            result = result?.getAt(it)
+        }
+        
+        return result
     }
 }

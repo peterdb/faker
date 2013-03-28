@@ -18,7 +18,7 @@ class YamlResourceBundleControl extends ResourceBundle.Control {
         if(input != null) {
             def map = loadMap(input)
             def localeKey = toTag(locale)
-
+            
             return new MapBasedResourceBundle(map[localeKey])
         }
 
@@ -39,7 +39,7 @@ class YamlResourceBundleControl extends ResourceBundle.Control {
 
     @Override
     public String toBundleName(String baseName, Locale locale) {
-        def bundleName = baseName + "." + toTag(locale)
+        return baseName + "." + toTag(locale)
     }
 
     @Override

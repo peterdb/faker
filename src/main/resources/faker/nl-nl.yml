@@ -1,0 +1,45 @@
+nl-nl:
+  faker:
+    address:
+      city_prefix: [Noord, Oost, West, Zuid, Nieuw, Oud]
+      city_suffix: ["dam", "berg", " aan de Rijn", " aan de IJssel", "swaerd", "endrecht", "recht", "ambacht", "enmaes", "wijk", "sland", "stroom", "sluus", "dijk", "dorp", "burg", "veld", "sluis", "koop", "lek", "hout", "geest", "kerk", "woude", "hoven", "hoten", "ingen", "plas", "meer"]
+      city:
+        - "#{Name.first_name}#{city_suffix}"
+        - "#{Name.last_name}#{city_suffix}"
+        - "#{city_prefix} #{Name.first_name}#{city_suffix}"
+        - "#{city_prefix} #{Name.last_name}#{city_suffix}"
+      building_number: ["#", "##", "###", "###a", "###b", "###c", "### I", "### II", "### III"]
+      street_suffix: ["straat", "laan", "weg", "plantsoen", "park"]
+      secondary_address: ["1 hoog", "2 hoog", "3 hoog"]
+      street_name:
+        - "#{Name.first_name}#{street_suffix}"
+        - "#{Name.last_name}#{street_suffix}"
+
+      street_address:
+        - "#{street_name} #{building_number}"
+      postcode: ["#### ??"]
+      state: ["Noord-Holland", "Zuid-Holland", "Utrecht", "Zeeland", "Overijssel", "Gelderland", "Drenthe", "Friesland", "Groningen", "Noord-Braband", "Limburg"]
+      default_country: [Nederland]
+
+    company:
+      suffix: [BV, V.O.F., Group, en Zonen]
+
+    internet:
+      domain_suffix: [nl, com, net, org]
+
+    name:
+      first_name: ["Amber", "Anna", "Anne", "Anouk", "Bas", "Bram", "Britt", "Daan", "Emma", "Eva", "Femke", "Finn", "Fleur", "Iris", "Isa", "Jan", "Jasper", "Jayden", "Jesse", "Johannes", "Julia", "Julian", "Kevin", "Lars", "Lieke", "Lisa", "Lotte", "Lucas", "Luuk", "Maud", "Max", "Mike", "Milan", "Nick", "Niels", "Noa", "Rick", "Roos", "Ruben", "Sander", "Sanne", "Sem", "Sophie", "Stijn", "Sven", "Thijs", "Thijs", "Thomas", "Tim", "Tom"]
+      tussenvoegsel: ["van", "van de", "van den", "van 't", "van het", "de", "den"]
+      last_name:  ["Bakker", "Beek", "Berg", "Boer", "Bos", "Bosch", "Brink", "Broek", "Brouwer", "Bruin", "Dam", "Dekker", "Dijk", "Dijkstra", "Graaf", "Groot", "Haan", "Hendriks", "Heuvel", "Hoek", "Jacobs", "Jansen", "Janssen", "Jong", "Klein", "Kok", "Koning", "Koster", "Leeuwen", "Linden", "Maas", "Meer", "Meijer", "Mulder", "Peters", "Ruiter", "Schouten", "Smit", "Smits", "Stichting", "Veen", "Ven", "Vermeulen", "Visser", "Vliet", "Vos", "Vries", "Wal", "Willems", "Wit"]
+      prefix: [Dhr., Mevr. Dr., Bsc, Msc, Prof.]
+      suffix: [Jr., Sr., I, II, III, IV, V]
+      name:
+        - "#{prefix} #{first_name} #{last_name}"
+        - "#{first_name} #{last_name} #{suffix}"
+        - "#{first_name} #{last_name}"
+        - "#{first_name} #{last_name}"
+        - "#{first_name} #{tussenvoegsel} #{last_name}"
+        - "#{first_name} #{tussenvoegsel} #{last_name}"
+
+    phone_number:
+      formats: ["(####) ######", "##########", "06########", "06 #### ####"]

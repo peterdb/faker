@@ -1,11 +1,55 @@
 nl-be:
   faker:
-    name:
-      girls_name: [Veerle, An, Ann, Lore]
+    address:
+      postcode: ["#### ??"]
+      state: ["Antwerpen", "Limburg", "Oost-Vlaanderen", "Vlaams-Brabant", "West-Vlaanderen", "Henegouwen", "Luik", "Luxemburg", "Namen", "Waals-Brabant"]
+      default_country: [België]
   
     company:
       suffix: [BVBA, NV, Group, en Zonen]
 
     internet:
-      free_email: [gmail.com, yahoo.com, hotmail.com]
       domain_suffix: [be, com, net, org]
+
+    phone_number:
+      formats: []
+      010 Waver
+011 Hasselt
+012 Tongeren
+013 Diest
+014 Herentals
+015 Mechelen
+016 Leuven
+019 Borgworm
+02 Brussel
+03 Antwerpen
+04 Luik, Voeren*
+050 Brugge
+051 Roeselare
+052 Dendermonde
+053 Aalst
+054 Ninove
+055 Oudenaarde
+056 Kortrijk, Komen-Waasten
+057 Ieper
+058 Veurne
+059 Oostende
+060 Chimay
+061 Libramont-Chevigny
+063 Aarlen
+064 La Louvière
+065 Bergen
+067 Nijvel
+068 Aat
+069 Doornik
+071 Charleroi
+080 Stavelot
+081 Namen
+082 Dinant
+083 Ciney
+084 Marche-en-Famenne
+085 Hoei
+086 Durbuy
+087 Verviers
+089 Genk
+09 Gent*

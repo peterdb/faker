@@ -1,4 +1,3 @@
 moduleName=faker-module
 moduleVersion=0.0.1-SNAPSHOT
 extensionClasses=faker.internal.groovy.ListExtension,faker.internal.groovy.ResourceBundleExtension,faker.internal.groovy.StringExtension
-staticExtensionClasses=faker.internal.groovy.I18nMethods

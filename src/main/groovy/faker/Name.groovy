@@ -7,26 +7,26 @@ class Name {
     private static FakerSupport support = new FakerSupport(Name)
 
     public static String name() {
-        return support.parse('name.name')
+        return support.getString('name.name')
     }
     
     public static String firstName() {
-        return support.fetch('name.first_name')
+        return support.getString('name.first_name')
     }
 
     public static String lastName() {
-        return support.fetch('name.last_name')
+        return support.getString('name.last_name')
     }
 
     public static String prefix() {
-        return support.fetch('name.prefix')
+        return support.getString('name.prefix')
     }
 
     public static String suffix() {
-        return support.fetch('name.suffix')
+        return support.getString('name.suffix')
     }
 
     public static String title() {
-        return support.fetch('name.title.descriptor') + ' ' + support.fetch('name.title.level') + ' ' + support.fetch('name.title.job')
+        return support.getString('name.title.descriptor') + ' ' + support.getString('name.title.level') + ' ' + support.getString('name.title.job')
     }
 }

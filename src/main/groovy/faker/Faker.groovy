@@ -1,8 +1,5 @@
 package faker
 
-import java.util.regex.Pattern
-
-import faker.internal.Bundles
 import faker.i18n.YamlResourceBundleControl
 
 /**
@@ -13,7 +10,7 @@ import faker.i18n.YamlResourceBundleControl
 class Faker {
 
     def static Locale locale
-    def static Bundles bundles = new Bundles()
+    def static ResourceBundle bundle
 
     static {
         setLocale(Locale.default)
@@ -21,8 +18,6 @@ class Faker {
     
     public static void setLocale(Locale l) {
         locale = l
-        
-        bundles = new Bundles()
-        bundles << ResourceBundle.getBundle("faker", locale, Faker.class.getClassLoader(), new YamlResourceBundleControl())
+        bundle = ResourceBundle.getBundle("faker", locale, Faker.class.getClassLoader(), new YamlResourceBundleControl())
     }
 }

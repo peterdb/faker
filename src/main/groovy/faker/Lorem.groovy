@@ -6,7 +6,7 @@ class Lorem {
     private static FakerSupport support = new FakerSupport(Lorem)
 
     public static String word() {
-        return support.translate('lorem.words').sample()
+        return support.getString('lorem.words')
     }
     
     public static List words(boolean supplemental = false) {
@@ -14,7 +14,7 @@ class Lorem {
     }
 
     public static List words(int wordCount, boolean supplemental = false) {
-        return (support.translate('lorem.words') + (supplemental ? support.translate('lorem.supplemental') : [])).sample(wordCount)
+        return (support.getObject('lorem.words') + (supplemental ? support.getObject('lorem.supplemental') : [])).sample(wordCount)
     }
     
     public static List words(List wordCount, boolean supplemental = false) {

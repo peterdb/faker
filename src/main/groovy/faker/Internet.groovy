@@ -17,7 +17,7 @@ class Internet {
     }
     
     public static String freeEmail(String name = null) {
-        return [userName(name), support.fetch('internet.free_email') ].join('@')
+        return [userName(name), support.getString('internet.free_email') ].join('@')
     }
     
     public static String safeEmail(String name = null) {
@@ -55,7 +55,7 @@ class Internet {
     }
       
     public static String domainSuffix() {
-        return support.fetch('internet.domain_suffix')
+        return support.getString('internet.domain_suffix')
     }
       
     public static String IPv4Address() {

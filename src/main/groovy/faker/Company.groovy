@@ -7,11 +7,11 @@ class Company {
     private static FakerSupport support = new FakerSupport(Company)
     
     public static String name() {
-        support.parse('company.name')
+        support.getString('company.name')
     }
 
     public static String suffix() {
-        support.fetch('company.suffix')
+        support.getString('company.suffix')
     }
 
     /**
@@ -20,7 +20,7 @@ class Company {
      * @return a catch phrase
      */
     public static String catchPhrase() {
-        support.translate('company.buzzwords').collect { list -> list.sample() }.join(' ')
+        support.getObject('company.buzzwords').collect { list -> list.sample() }.join(' ')
     }
 
     /**
@@ -29,7 +29,7 @@ class Company {
      * @return bs
      */
     public static String bs() {
-        support.translate('company.bs').collect { list -> list.sample() }.join(' ')
+        support.getObject('company.bs').collect { list -> list.sample() }.join(' ')
     }
 
 }

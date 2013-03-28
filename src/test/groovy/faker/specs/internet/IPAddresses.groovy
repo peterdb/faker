@@ -2,7 +2,7 @@ package faker.specs.internet
 
 import spock.lang.Specification
 import faker.Internet
-import faker.specs.support.Localized;
+import faker.specs.support.Localized
 
 @Localized
 class IPAddresses extends Specification {

@@ -1,9 +1,8 @@
 package faker.specs.lorem
 
-import spock.lang.Specification;
-import faker.Faker;import faker.specs.support.Localized;
-
-import faker.Lorem;
+import spock.lang.Specification
+import faker.Lorem
+import faker.specs.support.Localized
 
 @Localized
 class QuantitySingleParagraph extends Specification {

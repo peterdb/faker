@@ -1,10 +1,7 @@
 package faker.specs.strings
 
-import javax.security.auth.login.FailedLoginException;
-
-import spock.lang.Specification;
-
-import faker.Strings;
+import spock.lang.Specification
+import faker.Strings
 
 class Alphanumeric extends Specification {
 

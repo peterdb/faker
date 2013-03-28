@@ -1,18 +1,9 @@
 package faker.specs.internet;
 
-import static org.junit.Assert.*;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.spockframework.runtime.model.SpecMetadata;
-
-import faker.Internet;
-import faker.internal.groovy.ListExtension;
-import faker.specs.support.Localized;
-
-import spock.lang.Specification;
+import static org.junit.Assert.*
+import spock.lang.Specification
+import faker.Internet
+import faker.specs.support.Localized
 
 @Localized
 class EmailAddresses extends Specification {

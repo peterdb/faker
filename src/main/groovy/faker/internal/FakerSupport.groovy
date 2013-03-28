@@ -1,15 +1,14 @@
 package faker.internal
 
-import java.util.regex.Pattern
+import java.util.List;
+import java.util.Random;
 
-import faker.Faker;
+import faker.Faker
+import faker.Strings
 
 class FakerSupport {
-    private static final List Numbers = 0..9
-    private static final List ULetters = 'A'..'Z'
-    private static final List Letters = ULetters + ('a'..'z')
-
-    protected static Random rnd = new Random()
+    private static final List UPPERCASE = 'A'..'Z'
+    private Random rnd = new Random()
 
     final Class fakerClass
 
@@ -21,13 +20,13 @@ class FakerSupport {
         // example: add girls_name: [...] to a yml file, then you can call Name.girlsName or Name.girls_name
         fakerClass.metaClass.static.methodMissing = { method, ignoredArgs ->
             try {
-                fetch([
+                getString([
                     fakerClass.simpleName.toLowerCase(),
                     method
                 ].join("."))
             } catch (MissingResourceException e) {
                 try {
-                    fetch([
+                    getString([
                         fakerClass.simpleName.toLowerCase(),
                         unCamelCaseify(method)
                     ].join("."))
@@ -38,34 +37,37 @@ class FakerSupport {
         }
     }
 
+    protected getObject(String key) {
+        assert key
+        
+        return Faker.bundle["faker.$key"]
+    }
+    
     /** 
      * Helper method for the common approach of a translation
      * with a list of values and selecting one of them
      */
-    protected String fetch(String key) {
-        def fetched = translate(key)
+    protected String getString(String key) {
+        def raw = getObject(key)
 
-        if(fetched instanceof List) {
-            // TODO fetch random item
-            fetched = fetched.sample()
+        if(raw instanceof List) {
+            raw = raw.sample()
         }
-        if(false /*fetched ==~ */) {
-            // TODO regexify
+
+        // process the fetched string
+        if(raw.matches(/^\/.*\/$/)) {
+            // regular expression, so use Strings.xeger
+            return Strings.xeger(raw)
+        } else if(raw.matches(/.*#\{.*}.*/)) {
+            println raw
+        
+            // object expression
+            return raw.scan(~/#\{([A-Za-z]+\.)?([^\}]+)\}([^#]+)?/).collect { matcher ->
+                evaluate(*matcher[1..-1])
+            }.join()
         } else {
-            return fetched
+            return processPattern(raw)
         }
-    }
-
-    protected Object translate(String key) {
-        assert key, "key cannot be null or empty"
-
-        return Faker.bundles["faker.$key"]
-    }
-
-    protected String parse(String key) {
-        return fetch(key).scan(~/#\{([A-Za-z]+\.)?([^\}]+)\}([^#]+)?/).collect { matcher ->
-            evaluate(*matcher[1..-1])
-        }.join()
     }
 
     private String evaluate(String klass, String method, String etc) {
@@ -80,7 +82,7 @@ class FakerSupport {
         if(target.metaClass.respondsTo(target, javaMethod)) {
             text = target.metaClass.invokeMethod(target, javaMethod, null)
         } else {
-            text = fetch(target.simpleName.toLowerCase()+"."+method)
+            text = getString(target.simpleName.toLowerCase()+"."+method)
         }
 
         return text + (etc ?: '')
@@ -100,53 +102,12 @@ class FakerSupport {
         return s.split("(?<!^)(?=[AZ])").collect { it.toLowerCase() }.join('_')
     }
 
-    //        # Given a regular expression, attempt to generate a string
-    //        # that would match it.  This is a rather simple implementation,
-    //        # so don't be shocked if it blows up on you in a spectacular fashion.
-    //        #
-    //        # It does not handle ., *, unbounded ranges such as {1,},
-    //        # extensions such as (?=), character classes, some abbreviations
-    //        # for character classes, and nested parentheses.
-    //        #
-    //        # I told you it was simple. :) It's also probably dogslow,
-    //        # so you shouldn't use it.
-    //        #
-    //        # It will take a regex like this:
-    //        #
-    //        # /^[A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}$/
-    //        #
-    //        # and generate a string like this:
-    //        #
-    //        # "U3V  3TP"
-    //        #
-    public String regexify(String re) {
-        return re.
-        replaceAll(~/^\/?\^?/, '').replaceAll(~/\$?\/?$/, '').                                                                  // Ditch the anchors
-        replaceAll(~/\{(\d+)\}/, '{\1,\1}').replaceAll(~/\?/, '{0,1}').                                                             // All {2} become {2,2} and ? become {0,1}
-        replaceAll(~/(\[[^\]]+\])\{(\d+),(\d+)\}/) { m -> m[1] * (((m[2] as Integer)..(m[3] as Integer)).sample()) }.                // [12]{1,2} becomes [12] or [12][12]
-        replaceAll(~/(\([^\)]+\))\{(\d+),(\d+)\}/) { m -> m[1] * (((m[2] as Integer)..(m[3] as Integer)).sample()) }.                // (12|34){1,2} becomes (12|34) or (12|34)(12|34)
-        replaceAll(~/(\\?.)\{(\d+),(\d+)\}/) { m -> m[1] * (((m[2] as Integer)..(m[3] as Integer)).sample()) }.                      // A{1,2} becomes A or AA or \d{3} becomes \d\d\d
-        replaceAll(~/\((.*?)\)/) { m -> (m[0].replaceAll(~/[\(\)]/, '').split('|') as List).sample() }.                                      // (this|that) becomes 'this' or 'that'
-        replaceAll(~/\[([^\]]+)\]/) { m -> m[0].replaceAll(~/(\w)\-(\w)/) { range -> (range[1]..range[2]).sample() } }. // All A-Z inside of [] become C (or X, or whatever)
-        replaceAll(~/\[([^\]]+)\]/) { m -> (m[1].split('') as List).sample() }.                                                          // All [ABC] become B (or A or C)
-        replaceAll(~/\\d/) { Numbers.sample() }.
-        replaceAll(~/\\w/) { Letters.sample() }
-    }
-
-    public String regexify(Pattern pattern) {
-        return regexify(pattern.toString())
-    }
-
-    protected String numerify(String numberString) {
+    private String processPattern(String raw) {
         // make sure numerify results doesn’t start with a zero
-        numberString.replaceFirst(~/#/) { rnd.nextInt(9) + 1 }.replaceAll(~/#/) { rnd.nextInt(10) }
-    }
+        raw = raw.replaceFirst(~/#/) { rnd.nextInt(9) + 1 }.replaceAll(~/#/) { rnd.nextInt(10) }
 
-    protected String letterify(String letterString) {
-        return letterString.replaceAll(~/\?/) { ULetters.sample() }
-    }
-
-    protected String bothify(String string) {
-        return letterify(numerify(string))
+        raw = raw.replaceAll(~/\?/) { UPPERCASE.sample() }
+        
+        return raw
     }
 }
