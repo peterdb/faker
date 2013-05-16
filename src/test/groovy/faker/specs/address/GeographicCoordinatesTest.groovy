@@ -5,7 +5,7 @@ import spock.lang.Specification
 import spock.lang.Unroll;
 import faker.Address
 
-class GeographicCoordinates extends Specification {
+class GeographicCoordinatesTest extends Specification {
 
     def "latitude #lat"(def lat) {
         expect: "the output should be between -90 and +90"

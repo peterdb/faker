@@ -5,7 +5,7 @@ import faker.Lorem
 import faker.specs.support.Localized
 
 @Localized
-class QuantitySingleSentence extends Specification {
+class QuantitySingleSentenceTest extends Specification {
     def "sentence, no number of words"(def sentence) {
         expect: "the sentences should have 4-10 words"
         assert sentence.split(' ').size() in 4..10

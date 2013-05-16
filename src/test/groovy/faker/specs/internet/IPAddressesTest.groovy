@@ -5,7 +5,7 @@ import faker.Internet
 import faker.specs.support.Localized
 
 @Localized
-class IPAddresses extends Specification {
+class IPAddressesTest extends Specification {
 
     def ipv4(def ip) {
         expect:

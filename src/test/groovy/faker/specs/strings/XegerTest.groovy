@@ -3,7 +3,7 @@ package faker.specs.strings
 import spock.lang.Specification
 import faker.Strings
 
-class Xeger extends Specification {
+class XegerTest extends Specification {
 
     static regex
     

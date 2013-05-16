@@ -3,7 +3,7 @@ package faker.specs.strings
 import spock.lang.Specification
 import faker.Strings
 
-class Numeric extends Specification {
+class NumericTest extends Specification {
 
     def "numeric with fixed length"(def number) {
         expect: "the generated number is a valid number"

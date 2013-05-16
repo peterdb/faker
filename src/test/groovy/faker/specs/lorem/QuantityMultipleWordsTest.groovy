@@ -5,7 +5,7 @@ import faker.Lorem
 import faker.specs.support.Localized
 
 @Localized
-class QuantityMultipleWords extends Specification {
+class QuantityMultipleWordsTest extends Specification {
 
     def "words, no number of words"(def words) {
         expect: "the resulting list should be 3 words"

@@ -5,7 +5,7 @@ import faker.Internet
 import faker.specs.support.Localized
 
 @Localized
-class Url extends Specification {
+class UrlTest extends Specification {
 
     def "url"(def url) {
         expect: "the output must be an url with a random domain name, and a random slug attached"

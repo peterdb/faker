@@ -7,7 +7,7 @@ import faker.specs.support.Localized
 
 
 @Localized
-class ContentSentence extends Specification {
+class ContentSentenceTest extends Specification {
 
     def static standardWordList
     def static completeWordList

@@ -5,7 +5,7 @@ import faker.Internet
 import faker.specs.support.Localized
 
 @Localized
-class UserName extends Specification {
+class UserNameTest extends Specification {
 
     def "user name with no name"(def userName) {
         expect: "a random name is be generated, converted to lowercase, and glued with _ or ."

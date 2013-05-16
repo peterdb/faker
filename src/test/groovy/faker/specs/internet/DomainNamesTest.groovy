@@ -5,7 +5,7 @@ import faker.Internet
 import faker.specs.support.Localized
 
 @Localized
-class DomainNames extends Specification {
+class DomainNamesTest extends Specification {
 
     def "domain name"(def domainName) {
         expect: "the output should be a valid domain name"

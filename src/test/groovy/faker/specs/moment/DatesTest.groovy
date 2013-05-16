@@ -4,7 +4,7 @@ import spock.lang.Specification
 import faker.Moment
 import groovy.time.TimeCategory
 
-class Dates extends Specification {
+class DatesTest extends Specification {
 
     static beginningOfTime
     static today

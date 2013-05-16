@@ -1,5 +1,5 @@
 package faker.specs.stringsimport spock.lang.Specificationimport faker.Strings
-class Alphabetic extends Specification {
+class AlphabeticTest extends Specification {
 
     def "alphabetic with fixed length"(def string) {
         expect: "the generated string is an alphabetic string"        assert string ==~ /[a-zA-Z]+/        and: "the generated string has length 5"        assert string.size() == 5

@@ -6,7 +6,7 @@ import faker.Lorem
 import faker.specs.support.Localized
 
 @Localized
-class ContentParagraph extends Specification {
+class ContentParagraphTest extends Specification {
 
     def static standardWordList
     def static completeWordList

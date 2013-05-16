@@ -5,7 +5,7 @@ import faker.Lorem
 import faker.specs.support.Localized
 
 @Localized
-class QuantitySingleParagraph extends Specification {
+class QuantitySingleParagraphTest extends Specification {
 
     def "paragraph, no number of sentences"(def p) {
         expect: "the paragraphs should have 3-6 sentences"

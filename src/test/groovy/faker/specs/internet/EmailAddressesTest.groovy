@@ -6,7 +6,7 @@ import faker.Internet
 import faker.specs.support.Localized
 
 @Localized
-class EmailAddresses extends Specification {
+class EmailAddressesTest extends Specification {
 
     def "email without parameters"(def email) {
         expect: "email addresses with a random name and random domain"

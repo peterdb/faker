@@ -3,7 +3,7 @@ package faker.specs.strings
 import spock.lang.Specification
 import faker.Strings
 
-class Alphanumeric extends Specification {
+class AlphanumericTest extends Specification {
 
     def "alphanumeric with fixed length"(def string) {
         expect: "the generated string is an alphanumeric string"
