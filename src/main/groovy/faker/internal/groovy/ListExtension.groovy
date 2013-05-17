@@ -1,5 +1,7 @@
 package faker.internal.groovy
 
+import org.codehaus.groovy.runtime.DefaultGroovyMethods
+
 public class ListExtension {
     private static final Random rnd = new Random()
     
@@ -48,4 +50,16 @@ public class ListExtension {
         
         return result
     }
+	
+	public static <T> T asType(List self, Class<T> type) {
+		if(Date == type && self.size() == 3) {
+			Calendar cal = Calendar.instance
+			cal.clear()
+			cal.set(self[0], self[1] - 1 /* months are 0-based */, self[2])
+
+			return cal.time
+		}
+
+		DefaultGroovyMethods.asType(self, type)
+	}
 }

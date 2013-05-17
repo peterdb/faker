@@ -1,5 +1,6 @@
 package faker
 
+import faker.internal.FakerSupport;
 import groovy.time.TimeCategory
 
 import java.text.SimpleDateFormat
@@ -8,29 +9,22 @@ class CreditCard {
     
     // TODO make the numbers pass the luhn test
     
-    private static Faker.Base delegate = new Faker.Base(CreditCard)
-    
-    public static void main(String[] args) {
-        100.times {
-            println CreditCard.number()
-            println CreditCard.expirationDate()
-        }
-    }
+	private static FakerSupport support = new FakerSupport(CreditCard)
     
     public static String number() {
-        return delegate.parse("credit_card.number")
+        return support.getString("credit_card.number")
     }
     
     public static String visa() {
-        return delegate.numerify(delegate.fetch("credit_card.visa"))
+        return support.getString("credit_card.visa")
     }
     
     public static String mastercard() {
-        return delegate.numerify(delegate.fetch("credit_card.mastercard"))
+        return support.getString("credit_card.mastercard")
     }
     
     public static String amex() {
-        return delegate.numerify(delegate.fetch("credit_card.amex"))
+        return support.getString("credit_card.amex")
     }
     
     public static String expirationDate(Date after = null, int maxNumberOfMonths = 48) {

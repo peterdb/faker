@@ -59,8 +59,6 @@ class FakerSupport {
             // regular expression, so use Strings.xeger
             return Strings.xeger(raw)
         } else if(raw.matches(/.*#\{.*}.*/)) {
-            println raw
-        
             // object expression
             return raw.scan(~/#\{([A-Za-z]+\.)?([^\}]+)\}([^#]+)?/).collect { matcher ->
                 evaluate(*matcher[1..-1])
