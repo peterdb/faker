@@ -9,10 +9,14 @@ class LocalizedExtension extends AbstractAnnotationDrivenExtension<Localized> {
     def localizedFeatures = []
 
     void visitSpecAnnotation(Localized annotation, SpecInfo spec) {
-        locale = new Locale(annotation.value())
+        locale = toLocale(annotation.value())
     }
 
     void visitSpec(SpecInfo spec) {
         spec.addListener(new LocalizedRunListener(locale))
     }
+	
+	static Locale toLocale(String s) {
+		return new Locale(*(s.split("_")))
+	}
 }
