@@ -9,7 +9,9 @@ class CLI {
         CliBuilder cli = new CliBuilder(usage: ttt)
         cli.stopAtNonOption = false
         cli.with {
-            f(args:1, argName:'faker_type', 'the faker data type')
+            f(required: false, args:1, argName:'faker_type', 'the faker data type')
+			n(required: false, args:1, longOpt:'number', argName:'count', "the number of items to generate", type:Integer)
+			l(required: false, args:1, longOpt:'locale', argName:'locale', 'the locale')
             help("Prints this message")
         }
         
@@ -19,15 +21,20 @@ class CLI {
             ]
         
         OptionAccessor options = cli.parse(args)
+		
+		println options
+		
         if(options.help) {
             println cli.usage()
         } else if(options.f) {
+			def n = options.n ? options.n as int : 1
+		
             Class receiver = map[options.arguments()[0]]
             String method = options.f
-            
-            println receiver."$method"()
+
+			n.times {
+            	println receiver."$method"()
+			}
         }
-        
-        println cli.usage()
     }
 }
