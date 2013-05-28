@@ -14,7 +14,7 @@ class Address {
         return support.getString('address.street_name')
     }
 
-    public static String streetAddress(include_secondary = false) {
+    public static String streetAddress(boolean include_secondary = false) {
         return support.getString('address.street_address') + (include_secondary ? ' ' + secondaryAddress() : '')
     }
 
