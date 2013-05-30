@@ -6,7 +6,7 @@ class Lorem {
     private static FakerSupport support = new FakerSupport(Lorem)
 
     public static String word() {
-        return support.getString('lorem.words')
+        return support['lorem.words']
     }
     
     public static List words(boolean supplemental = false) {

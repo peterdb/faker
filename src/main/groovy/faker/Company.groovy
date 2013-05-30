@@ -7,11 +7,11 @@ class Company {
     private static FakerSupport support = new FakerSupport(Company)
     
     public static String name() {
-        support.getString('company.name')
+        support['company.name']
     }
 
     public static String suffix() {
-        support.getString('company.suffix')
+        support['company.suffix']
     }
 
     /**

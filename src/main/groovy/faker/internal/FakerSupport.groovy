@@ -42,6 +42,10 @@ class FakerSupport {
         
         return Faker.bundle["faker.$key"]
     }
+	
+	public String getAt(String key) {
+		return getString(key)
+	}
     
     /** 
      * Helper method for the common approach of a translation
