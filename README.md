@@ -1,4 +1,4 @@
-Faker
+Faker [![Build Status](https://travis-ci.org/peterdb/faker.png)](https://travis-ci.org/peterdb/faker)
 =====
 
 This is a Groovy port of Ruby Faker library for generating fake data.
