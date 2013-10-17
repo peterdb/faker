@@ -1,7 +1,9 @@
 package faker.specs.support
 
+import spock.lang.Ignore;
 import spock.lang.Specification;
 
+@Ignore
 @Localized("en_US_bork")
 class LocalizedTest extends Specification {
 
@@ -12,5 +14,5 @@ class LocalizedTest extends Specification {
 		where:
 		l = Locale.default
 	}
-	
+
 }

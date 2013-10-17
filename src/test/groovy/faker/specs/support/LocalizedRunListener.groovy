@@ -16,12 +16,13 @@ class LocalizedRunListener extends AbstractRunListener {
         this.locale = locale
     }
 
-    void beforeSpec(SpecInfo spec) {
+	void beforeFeature(FeatureInfo spec) {
         originalLocale = Locale.default
         Locale.default = locale
     }
 
-    void afterSpec(SpecInfo spec) {
+    void afterFeature(FeatureInfo spec) {
         Locale.default = originalLocale
     }
+	
 }
