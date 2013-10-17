@@ -35,7 +35,7 @@ yml files from Ruby Faker can be used as is (as a matter of fact, the yml files 
 
 Build
 ----
-Faker uses [maven](http://maven.apache.org/download.html "maven").
+Faker uses [Maven](http://maven.apache.org/download.html "Maven").
 
     mvn clean install
 
@@ -44,12 +44,12 @@ Contributing
 If you'd like to contribute code or formats/data for another locale, fork the project at github, make your changes, then send a pull request.
 
 This project uses the following technologies:
-- Groovy: programming language
-- Maven: build tool
-- easyb: (acceptance) testing
-- yaml: data format
+- [Groovy](http://groovy.codehaus.org/ "Groovy"): programming language
+- [Maven](http://maven.apache.org/download.html "Maven"): build tool
+- [Spock](https://code.google.com/p/spock/ "Spock"): testing
+- [YAML](http://en.wikipedia.org/wiki/Yaml "YAML"): data format
 
-If you make changes, please include an easyb test.
+If you make changes, please include a Spock test.
 
 License
 ----
